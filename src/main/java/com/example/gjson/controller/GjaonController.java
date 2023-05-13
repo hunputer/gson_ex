@@ -68,5 +68,31 @@ public class GjaonController {
         return "home";
     }
 
+    @GetMapping("/jsontomap")
+    public String jsontomap(Model model){
+        String json = "{'age':'1','custname':'jh'}";
+
+        Map<String, Object> map = gjsonService.jsonToMap(json);
+
+        for(Map.Entry<String, Object> entry : map.entrySet()){
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+        return "home";
+    }
+
+    @GetMapping("/nullObject")
+    public String nullObject(Model model){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("name", null);
+        jsonObject.addProperty("age", 9);
+
+        String result = gjsonService.jsonToStringNullObejct(jsonObject);
+
+        System.out.println(result);
+
+        return "home";
+    }
+
 
 }
